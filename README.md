@@ -24,7 +24,6 @@
 
 ### Association
 - has_many :items
-- has_one : address
 
 
 
@@ -33,7 +32,7 @@
 
 | column          | Type      | Options                     |
 |-----------------|-----------|-----------------------------|
-| post_code       | date(7)   | NOT NULL                    |
+| post_code       | string(7)   | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
 | prefecture_id   | integer   | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
@@ -45,13 +44,13 @@
 |-----------------|-----------|-----------------------------|
 | tel             | string    | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
-| user_id         | references| foreign_key: true NOT NULL  |
+| item            | references| foreign_key: true NOT NULL  |
 |-----------------|-----------|-----------------------------|
 
 ### Association
-- belongs_to : user
+- belongs_to : item
 - belongs_to : prefecture
-- has_many : purchases
+- belongs_to : purchase
 
 ## prefecture
 (active_hash)使用
@@ -80,7 +79,7 @@
 |-----------------|----------|----------------------------|
 | price           | integer  | NOT NULL                   |
 |-----------------|----------|----------------------------|
-| user_id         |references|foreign_key: true NOT NULL  |
+| user            |references|foreign_key: true NOT NULL  |
 |-----------------|----------|----------------------------|
 
 
@@ -92,7 +91,7 @@
 - belongs_to : area
 - belongs_to : shipping
 - has_one_attached : image
-
+- has_one : purchase
 ## category
 ## condition
 ## burden
@@ -112,10 +111,11 @@
 
 | column          | Type     | Options                   |
 |-----------------|----------|---------------------------|
-| item_id         |references| foreign_key: true NOT NULL|
+| item            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
-| address_id      |references| foreign_key: true NOT NULL|
+| user            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
 
 ### Association
-- belongs_to : address
+- has_one : address
+- belongs_to : item
