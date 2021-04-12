@@ -1,24 +1,128 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+(devise)使用
 
-Things you may want to cover:
+| column          | Type     | Options  |
+|-----------------|----------|----------|
+| email           | string   | NOT NULL |
+|-----------------|----------|----------|
+| password        | string   | NOT NULL |
+|-----------------|----------|----------|
+| nickname        | string   | NOT NULL |
+|-----------------|----------|----------|
+| family_name     | string   | NOT NULL |
+|-----------------|----------|----------|
+| fist_name       | string   | NOT NULL |
+|-----------------|----------|----------|
+| family_name_kana| string   | NOT NULL |
+|-----------------|----------|----------|
+| fist_name_kana  | string   | NOT NULL |
+|-----------------|----------|----------|
+| birthdata       | data     | NOT NULL |
 
-* Ruby version
+### Association
+- has_many :items
+- has_one : card
+- has_one : address
 
-* System dependencies
 
-* Configuration
+## cardsテーブル
 
-* Database creation
+| column          | Type     | Options  |
+|-----------------|----------|----------|
+| card_num        | integer  | NOT NULL |
+|-----------------|----------|----------|
+| mauth           | integer  | NOT NULL |
+|-----------------|----------|----------|
+| year            | integer  | NOT NULL |
+|-----------------|----------|----------|
+| cord            | integer  | NOT NULL |
+|-----------------|----------|----------|
+| user_id         |references|          |
+|-----------------|----------|----------|
 
-* Database initialization
+### Association
+- belongs_to : user
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## addressesテーブル
 
-* Deployment instructions
+| column          | Type      | Options  |
+|-----------------|-----------|----------|
+| post_code       | integer(7)| NOT NULL |
+|-----------------|-----------|----------|
+| prefecture_id   | integer   | NOT NULL |
+|-----------------|-----------|----------|
+| city            | string    | NOT NULL |
+|-----------------|-----------|----------|
+| home_num        | string    | NOT NULL |
+|-----------------|-----------|----------|
+| building_name   | string    | NOT NULL |
+|-----------------|-----------|----------|
+| tel             | string    | NOT NULL |
+|-----------------|-----------|----------|
+| user_id         | references| NOT NULL |
+|-----------------|-----------|----------|
 
-* ...
+### Association
+belongs_to : user
+belongs_to : prefecture
+
+## prefecture
+(active_hash)使用
+
+### Association
+- has_many : addresses
+
+
+## itemsテーブル
+
+| column          | Type     | Options  |
+|-----------------|----------|----------|
+| name            | string   | NOT NULL |
+|-----------------|----------|----------|
+| explanation     | text     | NOT NULL |
+|-----------------|----------|----------|
+| category_id     | integer  | NOT NULL |
+|-----------------|----------|----------|
+| condition_id    | integer  | NOT NULL |
+|-----------------|----------|----------|
+| burden_id       | integer  | NOT NULL |
+|-----------------|----------|----------|
+| area_id         | integer  | NOT NULL |
+|-----------------|----------|----------|
+| shipping_id     | integer  | NOT NULL |
+|-----------------|----------|----------|
+| price           | integer  | NOT NULL |
+|-----------------|----------|----------|
+| fee             | integer  | NOT NULL |
+|-----------------|----------|----------|
+| profit          | integer  | NOT NULL |
+|-----------------|----------|----------|
+
+
+### Association
+- belongs_to : user
+- belongs_to : category
+- belongs_to : condition
+- belongs_to : burden
+- belongs_to : area
+- belongs_to : shipping
+- has_one_attached : image
+
+## category
+## condition
+## burden
+## area
+## shipping
+(active_hash)使用
+
+### Association
+- has_many : items
+
+## imageテーブル
+(ActiveStorage)を使用
+
+
+
