@@ -24,7 +24,6 @@
 
 ### Association
 - has_many :items
-- has_one : card
 - has_one : address
 
 
@@ -34,7 +33,7 @@
 
 | column          | Type      | Options                     |
 |-----------------|-----------|-----------------------------|
-| post_code       | integer(7)| NOT NULL                    |
+| post_code       | date(7)   | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
 | prefecture_id   | integer   | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
@@ -50,8 +49,9 @@
 |-----------------|-----------|-----------------------------|
 
 ### Association
-belongs_to : user
-belongs_to : prefecture
+- belongs_to : user
+- belongs_to : prefecture
+- has_many : purchases
 
 ## prefecture
 (active_hash)使用
@@ -108,3 +108,14 @@ belongs_to : prefecture
 
 
 
+## purchasesテーブル
+
+| column          | Type     | Options                   |
+|-----------------|----------|---------------------------|
+| item_id         |references| foreign_key: true NOT NULL|
+|-----------------|----------|---------------------------|
+| address_id      |references| foreign_key: true NOT NULL|
+|-----------------|----------|---------------------------|
+
+### Association
+- belongs_to : address
