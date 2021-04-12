@@ -24,7 +24,7 @@
 
 ### Association
 - has_many :items
-- has_one :purchase
+- has_many :purchase
 
 
 
@@ -45,14 +45,12 @@
 |-----------------|-----------|-----------------------------|
 | tel             | string    | NOT NULL                    |
 |-----------------|-----------|-----------------------------|
-| item            | references| foreign_key: true NOT NULL  |
+| purchase        | references| foreign_key: true NOT NULL  |
 |-----------------|-----------|-----------------------------|
 |-----------------|-----------|-----------------------------|
 
 ### Association
-- belongs_to : item
-- belongs_to : prefecture
-- belongs_to : purchase
+- belongs_to : purchase 
 
 ## prefecture
 (active_hash)使用
@@ -81,7 +79,6 @@
 |-----------------|----------|----------------------------|
 | user            |references|foreign_key: true NOT NULL  |
 |-----------------|----------|----------------------------|
-| purchase        |references| foreign_key: true NOT NULL |
 |-----------------|----------|----------------------------|
 ### Association
 - belongs_to : user
@@ -109,6 +106,7 @@
 
 | column          | Type     | Options                   |
 |-----------------|----------|---------------------------|
+| item            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
 | user            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
@@ -116,3 +114,4 @@
 ### Association
 - has_one : address
 - belongs_to : user
+- belongs_to : item
