@@ -24,6 +24,7 @@
 
 ### Association
 - has_many :items
+- has_one :purchase
 
 
 
@@ -46,6 +47,7 @@
 |-----------------|-----------|-----------------------------|
 | item            | references| foreign_key: true NOT NULL  |
 |-----------------|-----------|-----------------------------|
+|-----------------|-----------|-----------------------------|
 
 ### Association
 - belongs_to : item
@@ -55,8 +57,6 @@
 ## prefecture
 (active_hash)使用
 
-### Association
-- has_many : addresses
 
 
 ## itemsテーブル
@@ -81,8 +81,8 @@
 |-----------------|----------|----------------------------|
 | user            |references|foreign_key: true NOT NULL  |
 |-----------------|----------|----------------------------|
-
-
+| purchase        |references| foreign_key: true NOT NULL |
+|-----------------|----------|----------------------------|
 ### Association
 - belongs_to : user
 - belongs_to : category
@@ -99,8 +99,6 @@
 ## shipping
 (active_hash)使用
 
-### Association
-- has_many : items
 
 ## imageテーブル
 (ActiveStorage)を使用
@@ -111,11 +109,10 @@
 
 | column          | Type     | Options                   |
 |-----------------|----------|---------------------------|
-| item            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
 | user            |references| foreign_key: true NOT NULL|
 |-----------------|----------|---------------------------|
 
 ### Association
 - has_one : address
-- belongs_to : item
+- belongs_to : user
