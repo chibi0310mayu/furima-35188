@@ -5,11 +5,18 @@ RSpec.describe User, type: :model do
     before do
       @user = FactoryBot.build(:user)
     end
-
+  context 'ユーザ新規登録ができる時' do
     it 'nicknameとemail,passwordとpassword_confirmation,family_nameとfist_name,family_name_kanaとfist_name_kana,birthdateが存在すれば登録できる' do
       expect(@user).to be_valid
     end
-
+    it 'passwordが6文字以上であれば登録できること' do
+      @user.password = '123abc'
+      @user.password_confirmation = '123abc'
+      expect(@user).to be_valid
+    end
+  end
+  
+  context 'ユーザ新規登録ができない時' do
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -26,11 +33,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
-    it 'passwordが6文字以上であれば登録できること' do
-      @user.password = '123abc'
-      @user.password_confirmation = '123abc'
-      expect(@user).to be_valid
-    end
+    
 
     it 'passwordが５文字以下であれば登録できない' do
       @user.password = '123ab'
@@ -96,9 +99,23 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Birthdate can't be blank")
     end
 
-    it 'passwordは半角英数字混合じゃないと登録できない' do
+    it 'passwordは英字のみでは登録できない' do
+      @user.password = 'aaaaaa'
+      @user.password_confirmation = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+
+    it 'passwordは数字のみの場合登録できない' do
       @user.password = '123456'
       @user.password_confirmation = '123456'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+
+    it 'passwordは全角では登録できない' do
+      @user.password = '１１１ＡＢＣ'
+      @user.password_confirmation = '１１１ＡＢＣ'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is invalid')
     end
@@ -126,5 +143,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include('Fist name kana is invalid')
     end
-  end
+   end
+ end
+
 end
