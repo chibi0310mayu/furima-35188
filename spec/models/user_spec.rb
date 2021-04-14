@@ -143,6 +143,20 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include('Fist name kana is invalid')
     end
+
+    it 'フリガナ名字がカタカナ以外だと登録できない' do
+      @user.family_name_kana = '田なKａ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Family name kana is invalid')
+      
+    end
+
+    it 'フリガナ名前がカタカナ以外だと登録でない' do
+      @user.fist_name_kana = '太ろUＵ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Fist name kana is invalid')
+      
+    end
    end
  end
 
