@@ -15,7 +15,7 @@ class Item < ApplicationRecord
 
     validates :image
   end
-
+  
   with_options numericality: { other_than: 1 }  do
     validates :category_id
     validates :condition_id
@@ -23,4 +23,5 @@ class Item < ApplicationRecord
     validates :area_id
     validates :shipping_id
   end
+
 end
