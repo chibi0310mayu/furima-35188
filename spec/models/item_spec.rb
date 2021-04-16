@@ -97,10 +97,9 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceは半角数字でないと登録できない' do
-
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceは300以下では登録できない' do
@@ -110,7 +109,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceは9,999,999以上だと登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
@@ -118,15 +117,13 @@ RSpec.describe Item, type: :model do
       it '半角英数混合では登録できないこと' do
         @item.price = 'ab123'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
-        
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it '半角英語だけでは登録できないこと' do
         @item.price = 'abcd'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
-        
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
