@@ -20,26 +20,18 @@ class ItemsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
-
-    unless user_signed_in? && current_user.id == @item.user.id
-      redirect_to action: :index
-      
-    end
-    
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user.id
   end
 
   def update
-
     if @item.update(item_params)
       redirect_to item_path
     else
       render :edit
     end
-    
   end
 
   private
@@ -50,9 +42,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_session
-    unless user_signed_in?
-      redirect_to new_user_session
-    end
+    redirect_to new_user_session unless user_signed_in?
   end
 
   def set_item
