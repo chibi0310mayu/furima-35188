@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
-  
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       render :new
     end
   end
-  
+
   def show
   end
 
@@ -37,7 +37,6 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to root_path
-    
   end
 
   private
