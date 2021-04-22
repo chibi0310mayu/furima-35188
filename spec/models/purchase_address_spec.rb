@@ -24,24 +24,23 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @purchase_address.post_code = '9042171'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Post code is invalid')
       end
 
       it 'post_codeは半角数値じゃないと保存できない' do
         @purchase_address.post_code = 'aBあ-１Ａ０９'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Post code is invalid')
       end
       it 'prefectureを選択していないと保存できないこと' do
         @purchase_address.prefecture_id = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Prefecture is not a number")
-
+        expect(@purchase_address.errors.full_messages).to include('Prefecture is not a number')
       end
       it 'prefectureが1だと保存できない' do
         @purchase_address.prefecture_id = 1
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@purchase_address.errors.full_messages).to include('Prefecture must be other than 1')
       end
       it 'cityは空では保存できない' do
         @purchase_address.city = ''
@@ -61,15 +60,14 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'telは11桁じゃないと保存できない' do
         @purchase_address.tel = '090123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Tel is invalid")
-
+        expect(@purchase_address.errors.full_messages).to include('Tel is invalid')
       end
       it 'telは半角数値でないと保存できない' do
         @purchase_address.tel = 'aAあ１kKか０７O'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Tel is invalid")
+        expect(@purchase_address.errors.full_messages).to include('Tel is invalid')
       end
-      it "tokenが空では保存できない" do
+      it 'tokenが空では保存できない' do
         @purchase_address.token = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
